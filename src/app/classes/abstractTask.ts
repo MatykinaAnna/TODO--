@@ -1,6 +1,6 @@
 export abstract class AbstractTast {
     
-    abstract id: string;
+    abstract id: number;
     abstract name: string;
     abstract dateOfCreation: Date;
 

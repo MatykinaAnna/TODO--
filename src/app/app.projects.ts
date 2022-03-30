@@ -1,22 +1,27 @@
 import { Component, OnInit,  } from '@angular/core';
 // import { HttpService} from './http.service';  
 import {Project} from './classes/project'  
-import { ProjectService } from './service/project.service';
 
 @Component({
     selector: 'my-app',
-    template: '',
-    providers: [ProjectService]
+    templateUrl: '../layout/app.project.html',
+    styleUrls: ['../style/app.project.css']
 })
-export class AppComponent implements OnInit { 
+export class AppProject implements OnInit { 
     
     editedProject: Project|null = null; 
     projects: Array<Project>;
+
+    //public isHidden: boolean = true
+    public openAddProject: boolean = false
     
     ngOnInit(): void{
         //this.project: Project = new Project()
     }
 
+    addProject(){
+        this.openAddProject = !this.openAddProject
+    }
     // добавление пользователя
     // addProject() {
     //     this.editedProject = new Project('', '', );

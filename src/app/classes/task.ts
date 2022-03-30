@@ -3,12 +3,12 @@ import { Project } from './project'
 
 export class Task extends AbstractTast{
 
-    constructor(public id: string,
+    constructor(public id: number,
                 public name: string,
                 public dateOfCreation: Date,
-                public parentProject: Project,
-                public parentTask?: Task,
-                public subtasks?: Task[] 
+                public parentProjectId: number,
+                public parentTaskId?: number,
+                //public subtasks?: Task[] 
                 ){
         super();
     }

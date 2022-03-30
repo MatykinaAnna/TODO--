@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div class="project_menu">
+        <div class="header">
+            <div class="header_t">Проекты</div>
+            <div class="btn-add">
+                <button class="btn-add_b" (click)="addProject()"></button>
+            </div>
+        </div>
+    </div>   
+    
+    <div [ngClass]="{hidden: !openAddProject}">
+        <modalWindow-addProject></modalWindow-addProject>
+    </div>
+
+</div>
