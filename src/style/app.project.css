@@ -5,6 +5,7 @@ button{
     display: flex;
     justify-content: start;
 }
+
 .container{
     width: 100vw;
     height: 100vh;
@@ -55,7 +56,7 @@ button{
     display: none;
 }
 .highlight{
-    background-color: #acf3e4;
+    background-color: #b7f4e6;
 }
 .listOfProjects{
     margin-right: 0.3em;
@@ -64,5 +65,17 @@ button{
 .li_obj{
     padding: 10px;
     border-radius: 3px;
-    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.li_obj>img{
+    margin-right: 10px;
+}
+.li_obj>div{
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: start;
+    width: 100%;
 }

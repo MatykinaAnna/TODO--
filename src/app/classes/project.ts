@@ -7,7 +7,7 @@ export class Project extends AbstractTast {
                 public name: string, 
                 public dateOfCreation: Date,
                 public dateOfCreationString?: String){
-                //public tasks?: number[]){
         super();
+
     }
 }

@@ -19,6 +19,7 @@ export class HttpService{
     }
 
     private handleError<T>(operation = 'operation', result?: T) {
+      console.log('handleError')
         return (error: any): Observable<T> => {
       
           // TODO: отправить ошибку в инфраструктуру удаленного журналирования
@@ -56,7 +57,8 @@ export class HttpService{
     }
 
     addProject(project: Project): Observable<Project> {
-        return this.http.post<Project>(this.projectUrl, project, this.httpOptions).pipe(
+        let p = {name: project.name, dateOfCreation: project.dateOfCreation}
+        return this.http.post<Project>(this.projectUrl, p, this.httpOptions).pipe(
           tap((newProject: Project) => this.log(`added project w/ id=${newProject.id}`)),
           catchError(this.handleError<Project>('addProject'))
         );

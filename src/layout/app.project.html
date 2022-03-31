@@ -17,8 +17,8 @@
             <div *ngFor="let item of projects">
                 <button class = 'li_obj'[ngClass]="highlight(item.id)"
                         (click)="chooseProject(item.id)">
-                    <img src="../assets/icons/Ellipse 1.svg" alt="">
-                    {{item.name}}
+                    <img src="../assets/icons/Ellipse.svg" alt="">
+                    <div>{{item.name}}</div>
                 </button>
             </div>
         </div>

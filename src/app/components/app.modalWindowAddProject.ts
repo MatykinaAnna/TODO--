@@ -21,6 +21,7 @@ export class ModalWindowAddProject implements OnInit {
     add(){
         if (this.nameProject != ''){
             this.addProject.emit(this.nameProject)
+            this.nameProject = ''
         }
     }
 }

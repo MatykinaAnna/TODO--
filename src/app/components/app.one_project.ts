@@ -9,39 +9,56 @@ import {HttpService} from '../../service/http.serviceProject'
     templateUrl: '../../layout/app.one_project.html',
     styleUrls: ['../../style/app.one_project.css'],
     providers: [HttpService]
+
 })
 export class OneProject implements OnInit { 
 
     @Input() set idProject (id: number){
-        console.log(' @Input() ))))')
         if (id != undefined){
             this._idProject = id
             console.log(this._idProject)
+            this.getDate()
         }
     }
 
     public data: Data
     public project: Project
     public _idProject: number
+    public formEditProject: boolean
 
     private httpService: HttpService;
 
     constructor(http: HttpClient){
         this.httpService = new HttpService(http)
-        // this.data = new Data(this.httpService)
+        this.formEditProject = false
     }
 
     ngOnInit(): void{
     }
 
     getDate(){
-        // this.httpService.getData(`api/objects/${this._idProject}`).subscribe((data:any) => {
-        //     console.log(data)
-        //     this.project = data
-        // });
-        // this.project.dateOfCreationString = this.project.dateOfCreation.toLocaleDateString()
+        console.log('getDate')
+        this.httpService.getProject(this._idProject).subscribe((data:Project) => {
+            let d = new Date(data.dateOfCreation)
+            this.project = new Project(data.id,
+                                        data.name,
+                                        d, d.toLocaleDateString())    
+        })
     }
 
     ngOnChanges() {
+    }
+
+    edit(){
+        this.formEditProject = !this.formEditProject
+    }
+
+    update(){
+        console.log('update')
+        this.httpService.updateProject(this.project)
+            .subscribe(() => {
+                
+        })
+
     }
 }

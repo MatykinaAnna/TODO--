@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Project } from './app/classes/project' 
 
 export class InMemoryDataService implements InMemoryDbService {
+  constructor(){}
   createDb() {
     const project = [
         {id: 1, name: 'Первый проект', dateOfCreation: new Date()},

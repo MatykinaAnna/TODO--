@@ -1,0 +1,49 @@
+button{
+    background: none;
+    border: none;
+}
+.container{
+    padding-top: 50px;
+    padding-left: 50px;
+    font-family: 'Roboto', sans-serif;
+}
+.text_h{
+    padding: 5px 25px;
+    border-radius: 3px;
+    font-size: 28px;
+    font-weight: 500;
+}
+.text_h:hover{
+    background-color: #b7f4e6;
+}
+.text_date{
+    margin-top: 5px;
+    text-align: end;
+    font-style: italic;
+}
+.bottom{
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+.bottom>button{
+    cursor: pointer;
+}
+.btm-cancell{
+    padding: 5px;
+    font-size: 16px;
+}
+.btm-cancell:hover{
+    text-decoration: underline
+}
+.btm-edit{
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #4cc5ab;
+    color: white;
+}
+input.text_h:hover{
+    background-color: white;
+}
