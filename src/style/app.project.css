@@ -1,3 +1,10 @@
+button{
+    background: none;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
 .container{
     width: 100vw;
     height: 100vh;
@@ -12,6 +19,7 @@
     display: flex;
     height: 50px;
     align-items: center;
+    justify-content: space-between;
 }
 .project_menu{
     width: 25%;
@@ -24,7 +32,7 @@
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    margin-right: 1em;
+    /* margin-right: 3em; */
 }
 .btn-add_b{
     background: none;
@@ -35,6 +43,7 @@
     width: 30px;
     height: 30px;
     background-size: 100%;
+    margin-right: 10px;
 }
 
 .btn-add_b:hover{
@@ -47,4 +56,13 @@
 }
 .highlight{
     background-color: #acf3e4;
+}
+.listOfProjects{
+    margin-right: 0.3em;
+    margin-left: 3em;
+}
+.li_obj{
+    padding: 10px;
+    border-radius: 3px;
+    /* background-color: aqua; */
 }

@@ -14,11 +14,13 @@
             </div>
         </div>
         <div class="listOfProjects">
-            <ul>
-                <li *ngFor="let item of projects">
-                    <span class = 'li_obj'[ngClass]="highlight(item.id)" >{{item.name}}</span>
-                </li>
-            </ul>
+            <div *ngFor="let item of projects">
+                <button class = 'li_obj'[ngClass]="highlight(item.id)"
+                        (click)="chooseProject(item.id)">
+                    <img src="../assets/icons/Ellipse 1.svg" alt="">
+                    {{item.name}}
+                </button>
+            </div>
         </div>
     </div>   
 

@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import {Project} from '../classes/project'  
 import {Data} from '../data/data'
 import {HttpClient} from '@angular/common/http';
-import {HttpService} from '../../service/http.serviceGet'
+import {HttpService} from '../../service/http.serviceProject'
 
 @Component({
     selector: 'one-project',
@@ -35,11 +35,11 @@ export class OneProject implements OnInit {
     }
 
     getDate(){
-        this.httpService.getData(`api/objects/${this._idProject}`).subscribe((data:any) => {
-            console.log(data)
-            this.project = data
-        });
-        this.project.dateOfCreationString = this.project.dateOfCreation.toLocaleDateString()
+        // this.httpService.getData(`api/objects/${this._idProject}`).subscribe((data:any) => {
+        //     console.log(data)
+        //     this.project = data
+        // });
+        // this.project.dateOfCreationString = this.project.dateOfCreation.toLocaleDateString()
     }
 
     ngOnChanges() {

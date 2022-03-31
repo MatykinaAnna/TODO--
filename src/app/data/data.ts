@@ -1,10 +1,13 @@
 import {Project} from '../classes/project'
 import {Task} from '../classes/task'
-import {HttpService} from '../../service/http.serviceGet'
+import {HttpService} from '../../service/http.serviceProject'
 
 export class Data {
     
-    public project: Project[] 
+    public project: Project[] =  [
+        {id: 1, name: 'Первый проект', dateOfCreation: new Date()},
+        {id: 2, name: 'Второй проект', dateOfCreation: new Date()}
+    ];
     public task: Task[] = []
     private http: HttpService
 
@@ -43,17 +46,17 @@ export class Data {
         this.task.push(task)
     }
 
-    public getAllProject(){  
-        new Promise( ()=>{
-            this.http.getData('api /objects').subscribe((data:Project[]) => {
-                this.project = data
-                console.log('this.project = data', this.project)   
-            }); 
-        }
-        ).then(()=>{
-            console.log('this')
-            return this.project } )
-    }
+    // public getAllProject(){  
+    //     new Promise( ()=>{
+    //         this.http.getData('api /objects').subscribe((data:Project[]) => {
+    //             this.project = data
+    //             console.log('this.project = data', this.project)   
+    //         }); 
+    //     }
+    //     ).then(()=>{
+    //         console.log('this')
+    //         return this.project } )
+    // }
 
     public getOneProject(id: number): Project{
         return this.project.find((item)=>{
