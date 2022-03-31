@@ -1,16 +1,28 @@
+<div [ngClass]="{hidden: !openAddProject}">
+    <modalWindow-addProject (closeModalWindow)="closeModalWindow($event)"
+    (addProject)="addProject($event)"
+    >
+    </modalWindow-addProject>
+</div>
 <div class="container">
 
     <div class="project_menu">
         <div class="header">
             <div class="header_t">Проекты</div>
             <div class="btn-add">
-                <button class="btn-add_b" (click)="addProject()"></button>
+                <button class="btn-add_b" (click)="openModalWindow()"></button>
             </div>
         </div>
+        <div class="listOfProjects">
+            <ul>
+                <li *ngFor="let item of projects">
+                    <span class = 'li_obj'[ngClass]="highlight(item.id)" >{{item.name}}</span>
+                </li>
+            </ul>
+        </div>
     </div>   
-    
-    <div [ngClass]="{hidden: !openAddProject}">
-        <modalWindow-addProject></modalWindow-addProject>
-    </div>
 
+    
+    <one-project [idProject]="indexProject"></one-project>
+    
 </div>

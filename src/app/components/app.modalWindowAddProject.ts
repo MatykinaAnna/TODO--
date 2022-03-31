@@ -1,4 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'modalWindow-addProject',
@@ -7,11 +7,20 @@ import { Component, OnInit,  } from '@angular/core';
 })
 export class ModalWindowAddProject implements OnInit { 
 
-    // public f_disabled: boolean = true
+    @Output() closeModalWindow = new EventEmitter<boolean>();
+    @Output() addProject = new EventEmitter<string>();
+
     public nameProject: string = ''
 
-    ngOnInit(): void{
-        
+    ngOnInit(): void{   
     }
 
+    cancell(submit: boolean){
+        this.closeModalWindow.emit(submit)
+    }
+    add(){
+        if (this.nameProject != ''){
+            this.addProject.emit(this.nameProject)
+        }
+    }
 }

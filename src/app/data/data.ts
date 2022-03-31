@@ -1,14 +1,20 @@
 import {Project} from '../classes/project'
 import {Task} from '../classes/task'
+import {HttpService} from '../../service/http.serviceGet'
 
 export class Data {
     
-    public project: Project[] = []
+    public project: Project[] 
     public task: Task[] = []
+    private http: HttpService
 
-    constructor(){}
+    constructor(http: HttpService){
+        this.http = http
+        console.log('constructor Data')
+        this.project = []
+    }
 
-    public addProject(name: string){
+    public addProject(name: string): Project{
         let project: Project
         let d = new Date()
         let id: number
@@ -19,6 +25,7 @@ export class Data {
         }
         project = new Project(id, name, d)
         this.project.push(project)
+        return (project)
     }
 
     public addTask(name: string, parentProjectId: number, parentTaskId?: number){
@@ -36,8 +43,23 @@ export class Data {
         this.task.push(task)
     }
 
-    public getAllProject(){
-        return this.project
+    public getAllProject(){  
+        new Promise( ()=>{
+            this.http.getData('api /objects').subscribe((data:Project[]) => {
+                this.project = data
+                console.log('this.project = data', this.project)   
+            }); 
+        }
+        ).then(()=>{
+            console.log('this')
+            return this.project } )
+    }
+
+    public getOneProject(id: number): Project{
+        return this.project.find((item)=>{
+            return (item.id == id)
+        })
+
     }
 
     public getAllTask(){

@@ -8,6 +8,7 @@ export class Task extends AbstractTast{
                 public dateOfCreation: Date,
                 public parentProjectId: number,
                 public parentTaskId?: number,
+                public dateOfCreationString?: String
                 //public subtasks?: Task[] 
                 ){
         super();

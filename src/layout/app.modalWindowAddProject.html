@@ -10,11 +10,11 @@
             <div class="name_t">
                 Название
             </div>
-            <input type="text" class="name_input" [ngModel]="nameProject">
+            <input type="text" class="name_input" [(ngModel)]="nameProject">
         </div>
     </div>
     <div class="bottom">
-        <button class="btm-cancell">Отмена</button>
-        <button class="btm-add">Добавить</button>
+        <button class="btm-cancell" (click)="cancell(false)">Отмена</button>
+        <button class="btm-add" (click)="add()">Добавить</button>
     </div>
 </div>

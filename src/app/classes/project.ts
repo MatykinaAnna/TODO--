@@ -5,7 +5,8 @@ export class Project extends AbstractTast {
     
     constructor(public id: number,
                 public name: string, 
-                public dateOfCreation: Date, ){
+                public dateOfCreation: Date,
+                public dateOfCreationString?: String){
                 //public tasks?: number[]){
         super();
     }
