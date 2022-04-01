@@ -25,6 +25,25 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="container_task">
+            <div *ngFor="let item of firstLevel_Tasks">
+                <task [task]="item"></task>
+                <hr>
+            </div>
+            <div class="formAddTask" *ngIf="formAddTask">
+                <input autofocus type="text" name="" id="" [(ngModel)]="nameNewTask">
+                <div class="button">
+                    <button class="btn-cancell" (click)="addTask()">Отмена</button>
+                    <button class="btn-add" (click)="saveTask()">Сохранить</button>
+                </div>
+            </div>
+            <div>
+                <button class="btn-addTask" (click)="addTask()" *ngIf="!formAddTask">
+                    Добавить задачу
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="create_msg" *ngIf="!project">

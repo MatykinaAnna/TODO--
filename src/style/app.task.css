@@ -1,0 +1,49 @@
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.task{
+    display: flex;
+    align-items: center;
+}
+.checkbox{
+    width: 20px;
+    height: 20px; 
+    margin-right: 10px;  
+    background: url(../assets/icons/checkbox1.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.checkbox:hover{
+    background: url(../assets/icons/chekbox2.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.task>div{
+    width: 100%;
+}
+.task>div:hover{
+    cursor: pointer;
+}
+
+.formTask>input{
+    width: 99%;
+    height: 25px;
+    margin-bottom: 5px;
+}
+.formTask>.button>button{
+    font-size: 14px;
+    font-weight: 400;
+    border: solid 0.3px #9b9898;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.formTask>.button>.btn-update{
+    margin-left: 10px;
+    background-color: #4cc5ab;
+    color: white;
+}

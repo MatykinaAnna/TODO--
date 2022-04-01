@@ -1,6 +1,7 @@
 button{
     background: none;
     border: none;
+
 }
 .container{
     padding-top: 50px;
@@ -9,7 +10,7 @@ button{
 }
 .row_header{
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: baseline;
 }
 .text_h{
@@ -50,14 +51,14 @@ button{
     color: white;
 }
 .btn-delPrj{
-    /* margin-left: 20px; */
     background: url('../assets/icons/dustbin.ico');
     background-repeat: no-repeat;
     background-position: left;
     background-size: contain;
     text-align: right;
     font-size: 15px;
-    width: 130%;
+    /* width: 130%; */
+    width: 150px;
     height: 20px;
     cursor: pointer;
     padding:  13px;
@@ -67,6 +68,27 @@ button{
     border: solid 0.5px;
     border-radius: 5px;
 }
+.btn-addTask{
+    background: url('../assets/icons/plus2.svg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    text-align: right;
+    font-size: 15px;
+    color:gray;
+    width: 150px;
+    height: 20px;
+    cursor: pointer;
+    padding:  13px;
+    padding-bottom: -3px;
+}
+.btn-addTask:hover{
+    background: url('../assets/icons/plus1.svg');
+    color: #15a483;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+}
 input.text_h:hover{
     background-color: white;
 }
@@ -74,4 +96,23 @@ input.text_h:hover{
 .create_msg{
     font-size: 20px;
     font-style: italic;
+}
+
+.formAddTask>input{
+    width: 99%;
+    height: 25px;
+    margin-bottom: 5px;
+}
+.formAddTask>.button>button{
+    font-size: 14px;
+    font-weight: 400;
+    border: solid 0.3px #9b9898;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.formAddTask>.button>.btn-add{
+    margin-left: 10px;
+    background-color: #4cc5ab;
+    color: white;
 }
