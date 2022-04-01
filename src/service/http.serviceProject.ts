@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders } from '@angular/common/http';
 import {Project} from '../app/classes/project'
+import {Task} from '../app/classes/task'
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -12,6 +13,7 @@ const httpOptions = {
 export class HttpService{
 
     private projectUrl = 'api/project'; 
+    private taskUrl = 'api/task'; 
 
     constructor(private http: HttpClient){ }
 
@@ -41,6 +43,14 @@ export class HttpService{
           );
     }
 
+    getTasks(): Observable<any>{
+      return this.http.get<Project[]>(this.taskUrl)
+      .pipe(
+          tap(_ => this.log('fetched projects')),
+          catchError(this.handleError<Project[]>('getTasks', []))
+        );
+    }
+
     getProject(id: number): Observable<Project> {
         const url = `${this.projectUrl}/${id}`;
         return this.http.get<Project>(url).pipe(
@@ -59,6 +69,18 @@ export class HttpService{
         );
     }
 
+    updateTask(task: Task): Observable<any> {
+      let t = {id: task.id,
+        name: task.name,
+        dateOfCreation: task.dateOfCreation,
+        parentProjectId: task.parentProjectId,
+        parentTaskId: task.parentTaskId}
+      return this.http.put(this.taskUrl, t, httpOptions).pipe(
+        tap((_) => this.log(`updated task id=${task.id}`)),
+        catchError(this.handleError<any>('updateTask'))
+      );
+  }
+
     addProject(project: Project): Observable<Project> {
         let p = {name: project.name, dateOfCreation: project.dateOfCreation}
         return this.http.post<Project>(this.projectUrl, p, httpOptions).pipe(
@@ -67,11 +89,23 @@ export class HttpService{
         );
     }
 
+    addTask(task: Task): Observable<Task> {
+      console.log(task)
+      let t = {name: task.name,
+        dateOfCreation: task.dateOfCreation,
+        parentProjectId: task.parentProjectId,
+        parentTaskId: task.parentTaskId}
+      return this.http.post<Task>(this.taskUrl, task, httpOptions).pipe(
+        tap((newTask: Task) => this.log(`added task w/ id=${newTask.id}`)),
+        catchError(this.handleError<Task>('addTask'))
+      );
+  }
+
     deleteProject(id: number): Observable<Project> {
         const url = `${this.projectUrl}/${id}`;
         return this.http.delete<Project>(url, httpOptions).pipe(
           tap(_ => this.log(`deleted project id=${id}`)),
           catchError(this.handleError<Project>('deleteProject'))
         );
-      }
+    }
 }

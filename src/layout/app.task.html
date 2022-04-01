@@ -1,0 +1,16 @@
+<div class="container" *ngIf="_task">
+    <div class="task" *ngIf="!editTask">
+        <button class="checkbox"></button>
+        <button (click)="edit()" >{{_task.name}}</button>
+    </div>
+    <div class="formTask" *ngIf="editTask">
+        <input type="text" [(ngModel)]="_task.name">
+        <div class="button">
+            <button class="btn-cancell" (click)="edit()">Отмена</button>
+            <button class="btn-update" (click)="updateTask()">Сохранить</button>
+        </div>
+    </div>
+    <div class="subtasks">
+
+    </div>
+</div>

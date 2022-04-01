@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppProject }   from './app.projects';
 import { ModalWindowAddProject } from './components/app.modalWindowAddProject'
+
 import { OneProject } from './components/app.one_project';
+import { OneTask } from './components/app.task';
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule,
@@ -19,7 +21,7 @@ import { OneProject } from './components/app.one_project';
     declarations: [ 
         AppProject,
         ModalWindowAddProject,
-        OneProject ],
+        OneProject, OneTask ],
     bootstrap:    [ AppProject ]
 })
 export class AppModule { }
