@@ -6,6 +6,10 @@ button{
 .task{
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+.task>div{
+    display: flex;
 }
 .checkbox{
     width: 20px;
@@ -22,10 +26,10 @@ button{
     background-repeat: no-repeat;
     background-size: contain;
 }
-.task>div{
+.task>div>div{
     width: 100%;
 }
-.task>div:hover{
+.task>div>div:hover{
     cursor: pointer;
 }
 
@@ -46,4 +50,30 @@ button{
     margin-left: 10px;
     background-color: #4cc5ab;
     color: white;
+}
+.check{
+    background: url(../assets/icons/checkbox3.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.btn-del{
+    background: url(../assets/icons/plus2.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px; 
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.btn-del:hover{
+    background: url(../assets/icons/plus1.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }

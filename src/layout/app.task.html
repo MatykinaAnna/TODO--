@@ -1,7 +1,10 @@
 <div class="container" *ngIf="_task">
     <div class="task" *ngIf="!editTask">
-        <button class="checkbox"></button>
-        <button (click)="edit()" >{{_task.name}}</button>
+        <div>
+            <button class="checkbox" (click)="checkTask()" [ngClass]="{check: check}"></button>
+            <button (click)="edit()" >{{_task.name}}</button>
+        </div>
+        <button class="btn-del" (click)="deleteTask()"></button>
     </div>
     <div class="formTask" *ngIf="editTask">
         <input type="text" [(ngModel)]="_task.name">

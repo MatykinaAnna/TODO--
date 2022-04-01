@@ -28,7 +28,7 @@
         <hr>
         <div class="container_task">
             <div *ngFor="let item of firstLevel_Tasks">
-                <task [task]="item"></task>
+                <task [task]="item" (delTask)="delTask($event)"></task>
                 <hr>
             </div>
             <div class="formAddTask" *ngIf="formAddTask">

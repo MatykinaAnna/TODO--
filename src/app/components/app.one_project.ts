@@ -118,4 +118,10 @@ export class OneProject implements OnInit {
             this.formAddTask = !this.formAddTask
         }
     }
+
+    delTask(event){
+        if (event){
+            this.getAllTasks(this._idProject)
+        }
+    }
 }
