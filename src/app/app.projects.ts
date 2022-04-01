@@ -17,7 +17,6 @@ export class AppProject implements OnInit {
     public editedProject: Project|null = null; 
     public indexProject: number
     public projects: Array<Project> = [];
-    //public data: Data
     public openAddProject: boolean = false
     private dataService: InMemoryDataService
 
@@ -39,9 +38,7 @@ export class AppProject implements OnInit {
             this.projects = data
             if (!indexProject){
                 this.indexProject = this.projects[0].id
-            } else {
-                this.indexProject = this.projects[indexProject].id
-            }
+            } 
         });
     }
 
@@ -62,6 +59,11 @@ export class AppProject implements OnInit {
                 this.projects.push(project)
             })
         this.openAddProject = false
+    }
+    updateProject(update: boolean){
+        if (update){
+            this.getAllProjects(this.indexProject)
+        }
     }
     highlight(index:number): object{
         return{

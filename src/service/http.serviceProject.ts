@@ -3,14 +3,15 @@ import {HttpClient, HttpHeaders } from '@angular/common/http';
 import {Project} from '../app/classes/project'
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
   
 @Injectable()
 export class HttpService{
 
     private projectUrl = 'api/project'; 
-    public httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-      };
 
     constructor(private http: HttpClient){ }
 
@@ -50,15 +51,18 @@ export class HttpService{
     }
 
     updateProject(project: Project): Observable<any> {
-        return this.http.put(this.projectUrl, project, this.httpOptions).pipe(
-          tap(_ => this.log(`updated project id=${project.id}`)),
+        let p = {id: project.id,
+          name: project.name,
+          dateOfCreation: project.dateOfCreation}
+        return this.http.put(this.projectUrl, p, httpOptions).pipe(
+          tap((_) => this.log(`updated project id=${project.id}`)),
           catchError(this.handleError<any>('updateProject'))
         );
     }
 
     addProject(project: Project): Observable<Project> {
         let p = {name: project.name, dateOfCreation: project.dateOfCreation}
-        return this.http.post<Project>(this.projectUrl, p, this.httpOptions).pipe(
+        return this.http.post<Project>(this.projectUrl, p, httpOptions).pipe(
           tap((newProject: Project) => this.log(`added project w/ id=${newProject.id}`)),
           catchError(this.handleError<Project>('addProject'))
         );
@@ -66,7 +70,7 @@ export class HttpService{
 
     deleteProject(id: number): Observable<Project> {
         const url = `${this.projectUrl}/${id}`;
-        return this.http.delete<Project>(url, this.httpOptions).pipe(
+        return this.http.delete<Project>(url, httpOptions).pipe(
           tap(_ => this.log(`deleted project id=${id}`)),
           catchError(this.handleError<Project>('deleteProject'))
         );

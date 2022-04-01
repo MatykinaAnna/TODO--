@@ -25,6 +25,8 @@
     </div>   
 
     
-    <one-project [idProject]="indexProject"></one-project>
+    <one-project [idProject]="indexProject"
+        (updateProject) = "updateProject($event)"
+    ></one-project>
     
 </div>

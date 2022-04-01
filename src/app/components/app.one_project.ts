@@ -1,8 +1,9 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import {Project} from '../classes/project'  
 import {Data} from '../data/data'
 import {HttpClient} from '@angular/common/http';
 import {HttpService} from '../../service/http.serviceProject'
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'one-project',
@@ -12,6 +13,8 @@ import {HttpService} from '../../service/http.serviceProject'
 
 })
 export class OneProject implements OnInit { 
+
+    @Output() updateProject = new EventEmitter<boolean>();
 
     @Input() set idProject (id: number){
         if (id != undefined){
@@ -27,10 +30,12 @@ export class OneProject implements OnInit {
     public formEditProject: boolean
 
     private httpService: HttpService;
+    private location: Location
 
     constructor(http: HttpClient){
         this.httpService = new HttpService(http)
         this.formEditProject = false
+        // this.location = new Location()
     }
 
     ngOnInit(): void{
@@ -53,12 +58,16 @@ export class OneProject implements OnInit {
         this.formEditProject = !this.formEditProject
     }
 
-    update(){
-        console.log('update')
-        this.httpService.updateProject(this.project)
-            .subscribe(() => {
-                
-        })
+    goBack(): void {
+        this.location.back();
+      }
 
+    update(): void{
+        this.httpService.updateProject(this.project).subscribe(()=>{
+            this.httpService.getProjects().subscribe((data: any)=>{
+                this.formEditProject = !this.formEditProject
+                this.updateProject.emit(true)
+            })
+        })
     }
 }

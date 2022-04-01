@@ -16,6 +16,7 @@ export class ModalWindowAddProject implements OnInit {
     }
 
     cancell(submit: boolean){
+        this.nameProject = ''
         this.closeModalWindow.emit(submit)
     }
     add(){

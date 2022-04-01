@@ -1,18 +1,26 @@
 <div class="container" *ngIf="project">
     <div class="header">
-        <button class="text_h" (click)="edit()" *ngIf="!formEditProject">
-            {{project.name}}
-        </button>
-        <div *ngIf="formEditProject">
-            <input type="text" class="text_h" [(ngModel)]="project.name">
-            <div class="bottom">
-                <button class="btm-cancell" (click)="edit()">Отмена</button>
-                <button class="btm-edit" (click)="update()">Сохранить</button>
+
+        <div class="row_header">
+            <div>
+                <button class="text_h" (click)="edit()" *ngIf="!formEditProject">
+                    {{project.name}}
+                </button>
+                <div *ngIf="formEditProject">
+                    <input type="text" class="text_h" [(ngModel)]="project.name" autofocus>
+                    <div class="bottom">
+                        <button class="btm-cancell" (click)="edit()">Отмена</button>
+                        <button class="btm-edit" (click)="update()">Сохранить</button>
+                    </div>
+                </div>
+                <div class="text_date">
+                    {{project.dateOfCreationString}}
+                </div>
+            </div>
+            <div>
+                <button class="btn-delPrj">Удалить проект</button>
             </div>
         </div>
-        <div class="text_date">
-            {{project.dateOfCreationString}}
-        </div> 
     </div>
 </div>
 <!-- {{_idProject}} -->
