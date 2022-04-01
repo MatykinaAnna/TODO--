@@ -14,18 +14,22 @@ export class OneTask implements OnInit {
 
     public _task: Task|undefined = undefined;
     public editTask: boolean;
-    private httpService: HttpService;
+    public check: boolean;
 
-    constructor(http: HttpClient){
-        this.editTask = false
-        this.httpService = new HttpService(http)
-    }
+    private httpService: HttpService;
 
     @Input() set task (task: Task){
         if (task != undefined){
             this._task = task
         } else {
         }
+    }
+    @Output() delTask = new EventEmitter<boolean>();
+
+    constructor(http: HttpClient){
+        this.editTask = false
+        this.httpService = new HttpService(http)
+        this.check = false
     }
 
     ngOnInit(): void{
@@ -42,6 +46,21 @@ export class OneTask implements OnInit {
                 // console.log(data)
             })
             this.edit()
+        })
+    }
+
+    checkTask(){
+        this.check=!this.check
+    }
+
+    deleteTask(){
+        console.log('deleteTask')
+        console.log(this._task.id)
+        this.httpService.deleteTask(this._task.id).subscribe(()=>{
+            // this.httpService.getTasks().subscribe((data)=>{
+            //     console.log(data)
+            // })
+            this.delTask.emit(true)
         })
     }
 

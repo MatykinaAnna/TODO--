@@ -108,4 +108,12 @@ export class HttpService{
           catchError(this.handleError<Project>('deleteProject'))
         );
     }
+
+    deleteTask(id: number): Observable<Task> {
+      const url = `${this.taskUrl}/${id}`;
+      return this.http.delete<Task>(url, httpOptions).pipe(
+        tap(_ => this.log(`deleted task id=${id}`)),
+        catchError(this.handleError<Task>('deleteTask'))
+      );
+    }
 }
