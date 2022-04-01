@@ -34,10 +34,14 @@ export class AppProject implements OnInit {
 
     getAllProjects(indexProject?: number): void{
         this.httpService.getProjects().subscribe((data:any) => {
-            console.log(data)
             this.projects = data
             if (!indexProject){
-                this.indexProject = this.projects[0].id
+                if (this.projects.length>0){
+                    this.indexProject = this.projects[0].id
+                } else {
+                    this.indexProject = undefined
+                }
+                
             } 
         });
     }
@@ -52,17 +56,25 @@ export class AppProject implements OnInit {
         this.indexProject = id
     }
     addProject(nameProject: string){
-        let id = this.dataService.genIdPrj(this.projects)
+        let id = this.dataService.genId(this.projects)
         let p = new Project(id, nameProject, new Date())
         this.httpService.addProject(p)
             .subscribe(project => {
                 this.projects.push(project)
+                if (this.projects.length == 1){
+                    this.indexProject = this.projects[0].id
+                }
             })
         this.openAddProject = false
     }
     updateProject(update: boolean){
         if (update){
             this.getAllProjects(this.indexProject)
+        }
+    }
+    deleteProject(del: boolean){
+        if (del){
+            this.getAllProjects()
         }
     }
     highlight(index:number): object{

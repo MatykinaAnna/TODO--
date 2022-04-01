@@ -15,18 +15,21 @@ import { Location } from '@angular/common';
 export class OneProject implements OnInit { 
 
     @Output() updateProject = new EventEmitter<boolean>();
+    @Output() deleteProject = new EventEmitter<boolean>();
 
     @Input() set idProject (id: number){
         if (id != undefined){
             this._idProject = id
-            console.log(this._idProject)
             this.getDate()
+        } else {
+            this._idProject = id
+            this.project = undefined
         }
     }
 
     public data: Data
-    public project: Project
-    public _idProject: number
+    public project: Project|undefined
+    public _idProject: number|undefined
     public formEditProject: boolean
 
     private httpService: HttpService;
@@ -42,7 +45,6 @@ export class OneProject implements OnInit {
     }
 
     getDate(){
-        console.log('getDate')
         this.httpService.getProject(this._idProject).subscribe((data:Project) => {
             let d = new Date(data.dateOfCreation)
             this.project = new Project(data.id,
@@ -67,6 +69,14 @@ export class OneProject implements OnInit {
             this.httpService.getProjects().subscribe((data: any)=>{
                 this.formEditProject = !this.formEditProject
                 this.updateProject.emit(true)
+            })
+        })
+    }
+
+    deletePrj(): void{
+        this.httpService.deleteProject(this._idProject).subscribe(()=>{
+            this.httpService.getProjects().subscribe((data: any)=>{
+                this.deleteProject.emit(true)
             })
         })
     }

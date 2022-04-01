@@ -13,7 +13,6 @@ export class Data {
 
     constructor(http: HttpService){
         this.http = http
-        console.log('constructor Data')
         this.project = []
     }
 
@@ -46,17 +45,6 @@ export class Data {
         this.task.push(task)
     }
 
-    // public getAllProject(){  
-    //     new Promise( ()=>{
-    //         this.http.getData('api /objects').subscribe((data:Project[]) => {
-    //             this.project = data
-    //             console.log('this.project = data', this.project)   
-    //         }); 
-    //     }
-    //     ).then(()=>{
-    //         console.log('this')
-    //         return this.project } )
-    // }
 
     public getOneProject(id: number): Project{
         return this.project.find((item)=>{

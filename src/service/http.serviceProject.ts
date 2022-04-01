@@ -20,7 +20,6 @@ export class HttpService{
     }
 
     private handleError<T>(operation = 'operation', result?: T) {
-      console.log('handleError')
         return (error: any): Observable<T> => {
       
           // TODO: отправить ошибку в инфраструктуру удаленного журналирования
