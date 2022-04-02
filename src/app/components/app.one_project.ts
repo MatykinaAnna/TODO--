@@ -57,7 +57,8 @@ export class OneProject implements OnInit {
             let d = new Date(data.dateOfCreation)
             this.project = new Project(data.id,
                                         data.name,
-                                        d, d.toLocaleDateString())    
+                                        d, d.toLocaleDateString()) 
+            console.log(this.project)   
         })
     }
 
@@ -65,7 +66,6 @@ export class OneProject implements OnInit {
     }
 
     getAllTasks(idRrj: number): void{
-        console.log('getAllTasks')
         this.firstLevel_Tasks = []
         this.httpService.getTasks().subscribe((data:Task[]) => {
             this.tasks = data

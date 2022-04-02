@@ -15,7 +15,11 @@ export class OneTask implements OnInit {
 
     public _task: Task|undefined = undefined;
     public _task_name: string
+    public subtask: Task[]
+    public subtaskOnScreen: boolean
+    public subtask_name: string
     public editTask: boolean;
+    public formForSubtask: boolean
     public check: boolean;
 
     // private tasks: Task[] = []
@@ -23,8 +27,10 @@ export class OneTask implements OnInit {
     private httpService: HttpService;
 
     @Input() set task (task: Task){
+
         if (task != undefined){
             this._task = task
+            this.getAllSubtask()
         } else {
         }
     }
@@ -32,12 +38,25 @@ export class OneTask implements OnInit {
 
     constructor(http: HttpClient){
         this.editTask = false
+        this.formForSubtask = false
         this.httpService = new HttpService(http)
         this.check = false
         this.dataService = new InMemoryDataService()
+        this.subtask = []
+        this.subtaskOnScreen = false
     }
 
     ngOnInit(): void{
+    }
+
+    getAllSubtask(){
+        this.httpService.getTasks().subscribe((data: Task[])=>{
+            data.forEach((item: Task)=>{
+                if (item.parentTaskId == this._task.id){
+                    this.subtask.push(item)
+                }
+            })
+        })
     }
 
     edit(){
@@ -51,7 +70,6 @@ export class OneTask implements OnInit {
             t.name = this._task_name
             this.httpService.updateTask(t).subscribe(()=>{
                 this.httpService.getTasks().subscribe((data)=>{
-                    // console.log(data)
                 })
                 this.edit()
             })
@@ -67,20 +85,35 @@ export class OneTask implements OnInit {
         console.log('deleteTask')
         console.log(this._task.id)
         this.httpService.deleteTask(this._task.id).subscribe(()=>{
-            // this.httpService.getTasks().subscribe((data)=>{
-            //     console.log(data)
-            // })
             this.delTask.emit(true)
         })
     }
 
-    addSutask(){
-        // this.httpService.getTasks().subscribe((data:Task[])=>{
-        //     let id: number = this.dataService.genId(data)
-
-        // })
-        
-        // let t = new Task ()
+    addSubtask(){
+        console.log(this._task.id)
+        this.formForSubtask = !this.formForSubtask
+    }
+    editSubtask(){
+        this.subtask_name=''
+        this.formForSubtask = !this.formForSubtask
+    }
+    saveSubtask(){
+        if (this.subtask_name!=''){ 
+            this.httpService.getTasks().subscribe((data: Task[])=>{
+                let id = this.dataService.genId(data)
+                let subtask = new Task(id, this.subtask_name, new Date(),
+                                        this._task.parentProjectId,
+                                        this._task.id)
+                this.httpService.addTask(subtask).subscribe((data)=>{
+                    this.subtask.push(data)
+                })
+                this.subtask_name = ''
+            })
+            this.formForSubtask = !this.formForSubtask
+        }
+    }
+    f_subtaskOnScreen(){
+        this.subtaskOnScreen = !this.subtaskOnScreen
     }
 
 }
