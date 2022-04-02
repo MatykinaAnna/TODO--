@@ -28,7 +28,7 @@
     </div>
     <div class="subtasks" *ngIf="subtaskOnScreen">
         <div *ngFor="let subt of subtask">
-            <task [task]="subt" (delTask)="delTask($event)"></task>
+            <task [task]="subt" (delTask)="delTask1($event)"></task>
         </div>
     </div>
 </div>

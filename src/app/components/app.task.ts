@@ -50,6 +50,7 @@ export class OneTask implements OnInit {
     }
 
     getAllSubtask(){
+        this.subtask = []
         this.httpService.getTasks().subscribe((data: Task[])=>{
             data.forEach((item: Task)=>{
                 if (item.parentTaskId == this._task.id){
@@ -81,12 +82,44 @@ export class OneTask implements OnInit {
         this.check=!this.check
     }
 
+    delTask1(event: boolean){
+        if (event){
+            this.getAllSubtask()
+        }    
+    }
+
     deleteTask(){
         console.log('deleteTask')
-        console.log(this._task.id)
-        this.httpService.deleteTask(this._task.id).subscribe(()=>{
-            this.delTask.emit(true)
+        this.httpService.getTasks().subscribe((data: Task[])=>{
+            let arrayOfTask = data
+            let queue: Task[] = []
+            let arrayOfid: number[] = []
+            arrayOfid.push(this._task.id)
+            arrayOfid =  this.deleteTaskRecursion(this._task,
+                arrayOfTask, queue, arrayOfid)
+            
+            console.log(arrayOfid)
+            arrayOfid.forEach((item: number)=>{
+                console.log('delete', item)
+                this.httpService.deleteTask(item).subscribe((data)=>{
+                    this.delTask.emit(true)
+                })
+            })
         })
+    }
+
+    deleteTaskRecursion(task: Task, arrayOfTask: Task[], queue: Task[], arrayOfid: number[]): number[]{
+        arrayOfTask.forEach((item, index)=>{
+            if (item.parentTaskId == task.id){
+                queue.push(item)
+                console.log(item.name)
+                arrayOfid.push(item.id)
+            }
+        })
+        if (queue.length > 0){
+            this.deleteTaskRecursion(queue.shift(), arrayOfTask, queue, arrayOfid)
+        }
+        return arrayOfid
     }
 
     addSubtask(){
