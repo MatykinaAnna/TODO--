@@ -77,3 +77,18 @@ button{
     background-repeat: no-repeat;
     background-size: contain;
 }
+.btn-add{
+    background: url(../assets/icons/plus2.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px; 
+}
+.btn-add:hover{
+    background: url(../assets/icons/plus1.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
