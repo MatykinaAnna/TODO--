@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angu
 import {Task} from '../classes/task'  
 import {HttpClient} from '@angular/common/http';
 import {HttpService} from '../../service/http.serviceProject'
+import {InMemoryDataService} from '../../in-memory-data.service'
 
 @Component({
     selector: 'task',
@@ -13,9 +14,12 @@ import {HttpService} from '../../service/http.serviceProject'
 export class OneTask implements OnInit { 
 
     public _task: Task|undefined = undefined;
+    public _task_name: string
     public editTask: boolean;
     public check: boolean;
 
+    // private tasks: Task[] = []
+    private dataService: InMemoryDataService
     private httpService: HttpService;
 
     @Input() set task (task: Task){
@@ -30,23 +34,29 @@ export class OneTask implements OnInit {
         this.editTask = false
         this.httpService = new HttpService(http)
         this.check = false
+        this.dataService = new InMemoryDataService()
     }
 
     ngOnInit(): void{
     }
 
     edit(){
+        this._task_name=this._task.name
         this.editTask = !this.editTask
     }
 
     updateTask(){
-        console.log('updateTask')
-        this.httpService.updateTask(this._task).subscribe(()=>{
-            this.httpService.getTasks().subscribe((data)=>{
-                // console.log(data)
+        if (this._task_name != ''){
+            let t = this._task
+            t.name = this._task_name
+            this.httpService.updateTask(t).subscribe(()=>{
+                this.httpService.getTasks().subscribe((data)=>{
+                    // console.log(data)
+                })
+                this.edit()
             })
-            this.edit()
-        })
+        }
+        console.log('updateTask')
     }
 
     checkTask(){
@@ -62,6 +72,15 @@ export class OneTask implements OnInit {
             // })
             this.delTask.emit(true)
         })
+    }
+
+    addSutask(){
+        // this.httpService.getTasks().subscribe((data:Task[])=>{
+        //     let id: number = this.dataService.genId(data)
+
+        // })
+        
+        // let t = new Task ()
     }
 
 }

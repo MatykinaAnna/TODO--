@@ -31,6 +31,7 @@ export class OneProject implements OnInit {
 
     public data: Data
     public project: Project|undefined
+    public project_name: string
     public _idProject: number|undefined
     public formEditProject: boolean
     public firstLevel_Tasks: Task[] = []
@@ -77,16 +78,22 @@ export class OneProject implements OnInit {
     }
 
     edit(){
+        this.project_name = this.project.name
         this.formEditProject = !this.formEditProject
     }
 
     update(): void{
-        this.httpService.updateProject(this.project).subscribe(()=>{
-            this.httpService.getProjects().subscribe((data: any)=>{
-                this.formEditProject = !this.formEditProject
-                this.updateProject.emit(true)
+        if (this.project_name != ''){
+            this.project = new Project(this.project.id,
+                this.project_name,
+                this.project.dateOfCreation)
+            this.httpService.updateProject(this.project).subscribe(()=>{
+                this.httpService.getProjects().subscribe((data: any)=>{
+                    this.formEditProject = !this.formEditProject
+                    this.updateProject.emit(true)
+                })
             })
-        })
+        }
     }
 
     deletePrj(): void{

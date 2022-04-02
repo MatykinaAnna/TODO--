@@ -9,14 +9,14 @@
                         {{project.name}}
                     </button>
                     <div *ngIf="formEditProject">
-                        <input type="text" class="text_h" [(ngModel)]="project.name" autofocus>
+                        <input type="text" class="text_h" [(ngModel)]="project_name" autofocus>
                         <div class="bottom">
                             <button class="btm-cancell" (click)="edit()">Отмена</button>
                             <button class="btm-edit" (click)="update()">Сохранить</button>
                         </div>
                     </div>
                     <div class="text_date">
-                        {{project.dateOfCreationString}}
+                        {{project.dateOfreationString}}
                     </div>
 
                 </div>
