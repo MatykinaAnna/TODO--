@@ -3,6 +3,9 @@ button{
     border: none;
     cursor: pointer;
 }
+button:hover{
+    cursor: pointer;
+}
 .task{
     display: flex;
     align-items: center;
@@ -91,4 +94,50 @@ button{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+.btn-open{
+    background: url(../assets/icons/triangle.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px; 
+}
+.btn-open:hover{
+    background: url(../assets/icons/triangle1.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.formSubtask{
+    margin-top: 5px;
+    margin-left: 4%;
+}
+.formSubtask>input{
+    width: 99%;
+    height: 25px;
+    margin-bottom: 5px;
+}
+.formSubtask>.button>button{
+    font-size: 14px;
+    font-weight: 400;
+    border: solid 0.3px #9b9898;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.formSubtask>.button>.btn-update{
+    margin-left: 10px;
+    background-color: #4cc5ab;
+    color: white;
+}
+.subtasks{
+    padding-left: 2%;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+button.open{
+    transform: rotate(180deg);
 }

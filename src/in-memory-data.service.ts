@@ -30,6 +30,20 @@ export class InMemoryDataService implements InMemoryDbService {
         dateOfCreation: new Date(),
         parentProjectId: 2,
         parentTaskId: -1
+      },
+      {
+        id: 4,
+        name: 'Первая подзадача',
+        dateOfCreation: new Date(),
+        parentProjectId: 2,
+        parentTaskId: 1
+      },
+      {
+        id: 5,
+        name: 'Вторая подзадача',
+        dateOfCreation: new Date(),
+        parentProjectId: 2,
+        parentTaskId: 1
       }
   ];
     return {project, task};

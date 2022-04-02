@@ -5,8 +5,18 @@
             <button (click)="edit()" >{{_task.name}}</button>
         </div>
         <div>
-            <button class="btn-add" (click)="addSubask()"></button>
+            <button class="btn-open"
+                    (click)="f_subtaskOnScreen()"
+                    [ngClass]="{open: subtaskOnScreen}"></button>
+            <button class="btn-add" (click)="addSubtask()"></button>
             <button class="btn-del" (click)="deleteTask()"></button>
+        </div>
+    </div>
+    <div class="formSubtask" *ngIf="formForSubtask">
+        <input type="text" [(ngModel)]="subtask_name">
+        <div class="button">
+            <button class="btn-cancell" (click)="editSubtask()">Отмена</button>
+            <button class="btn-update" (click)="saveSubtask()">Сохранить</button>
         </div>
     </div>
     <div class="formTask" *ngIf="editTask">
@@ -16,7 +26,9 @@
             <button class="btn-update" (click)="updateTask()">Сохранить</button>
         </div>
     </div>
-    <div class="subtasks">
-
+    <div class="subtasks" *ngIf="subtaskOnScreen">
+        <div *ngFor="let subt of subtask">
+            <task [task]="subt" (delTask)="delTask($event)"></task>
+        </div>
     </div>
 </div>
