@@ -96,7 +96,23 @@ export class OneProject implements OnInit {
         }
     }
 
-    deletePrj(): void{
+    getTasksForTheProject(rezult: Task[]){
+        this.httpService.getTasks().subscribe((data: Task[])=>{
+            data.forEach((item)=>{
+                if (item.parentProjectId == this._idProject){
+                    rezult.push(item)
+                }
+            })
+        })
+    }
+
+    async deletePrj(): Promise<void>{
+        let arrayOfTask: Task[]=[]
+        await this.getTasksForTheProject(arrayOfTask)
+        console.log(arrayOfTask)
+        arrayOfTask.forEach((item)=>{
+            this.httpService.deleteTask(item.id)
+        }) 
         this.httpService.deleteProject(this._idProject).subscribe(()=>{
             this.httpService.getProjects().subscribe((data: any)=>{
                 this.deleteProject.emit(true)
