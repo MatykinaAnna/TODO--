@@ -79,7 +79,7 @@ button{
     width: 150px;
     height: 20px;
     cursor: pointer;
-    padding:  13px;
+    /* padding:  13px; */
     padding-bottom: -3px;
 }
 .btn-addTask:hover{
